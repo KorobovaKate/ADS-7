@@ -1,7 +1,7 @@
 // Copyright 2021 NNTU-CS
 #include "train.h"
 
-Train::Train() : countOp(0), first(nullptr), length(0) {}
+Train::Train() : countOp(0), first(nullptr) {}
 
 void Train::addCar(bool light) {
     Car *newCar = new Car{light, nullptr, nullptr};
@@ -17,7 +17,6 @@ void Train::addCar(bool light) {
         newCar->next = first;
         first->pred = newCar;
     }
-    length++;
 }
 
 int Train::getLength()
@@ -43,7 +42,7 @@ int Train::getLength()
       countOp++;
 
       for (int i = 0; i < steps; i++) {
-        curr = curr->prev;
+        curr = curr->pred;
         countOp++;
       }
 
@@ -54,6 +53,7 @@ int Train::getLength()
     }
     steps++;
   }
+}
 
 int Train::getOpCount() {
     return countOp;

@@ -20,39 +20,24 @@ void Train::addCar(bool light) {
 
 int Train::getLength() {
   if (!first) return 0;
-  int countOp = 0;
-  Car *curr = first;
-  
-  if (!curr->light) {
-    curr->light = true;
+  int steps = 0;
+  while (!curr->light && curr != first) {
+      curr = curr->next;
+      steps++;
+      countOp++;
   }
+    
+  if (!curr->light) return steps;
+    
+  curr->light = false;
+  countOp++;
 
-  int steps = 1;
-  
-  while (true) {
-    for (int i = 0; i < steps; i++) {
-        curr = curr->next;
-        countOp++;
-    }
-      
-    if (curr->light) {
-        curr->light = false;
-        countOp++;
-        
-        for (int i = 0; i < steps; i++) {
-            curr = curr->prev;
-            countOp++;
-        }
-        
-        if (!curr->light) {
-            return steps;
-        }
-        steps++;
-    } else {
-        steps++;
-    }
+  for (int i = 0; i < steps; i++) {
+    curr = curr->prev;
+    countOp++;
   }
-    return steps;
+    
+  if (!curr->light) return steps;
 }
 
 int Train::getOpCount() {

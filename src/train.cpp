@@ -31,26 +31,28 @@ int Train::getLength() {
   
   while (true) {
     for (int i = 0; i < steps; i++) {
-      curr = curr->next;
-      countOp++;
-    }
-    if (curr->light) {
-      curr->light = false;
-      countOp++;
-
-      for (int i = 0; i < steps; i++) {
-        curr = curr->prev;
+        current = current->next;
         countOp++;
-      }
-
-      if (!curr->light) {
-        return steps;
-      }
-      steps = 0;
+    }
+      
+    if (current->light) {
+        current->light = false;
+        countOp++;
+        
+        for (int i = 0; i < steps; i++) {
+            current = current->prev;
+            countOp++;
+        }
+        
+        if (!current->light) {
+            return steps;
+        }
+        steps++;
     } else {
         steps++;
     }
   }
+    return steps;
 }
 
 int Train::getOpCount() {

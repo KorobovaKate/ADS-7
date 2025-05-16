@@ -27,7 +27,7 @@ int Train::getLength() {
     curr->light = true;
   }
 
-  int steps = 0;
+  int steps = 1;
   
   while (true) {
     for (int i = 0; i < steps; i++) {
@@ -47,8 +47,9 @@ int Train::getLength() {
         return steps;
       }
       steps = 0;
+    } else {
+        steps++;
     }
-    steps++;
   }
 }
 
